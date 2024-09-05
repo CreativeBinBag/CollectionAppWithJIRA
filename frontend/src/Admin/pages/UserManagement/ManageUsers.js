@@ -12,7 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Header from '../../components/Header';
 import api from '../../api/axios';
 import ConfirmDeleteDialog from '../../components/ConfirmDeleteDialog';
-import CreateTicketButton from '../../../JIRA/createTicketButton';
+import CreateTicketButton from '../../../JIRA/CreateTicketButton';
 
 const ManageUsers = () => {
 
