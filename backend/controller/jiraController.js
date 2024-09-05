@@ -11,7 +11,7 @@ const createJiraUser = async (email, displayName) => {
       emailAddress: email,
       displayName: displayName,
       notification: "true",
-      products: ["jira-servicedesk", "jira-software"] // Ensure the user has product access
+      products: ["jira-servicedesk", "jira-software"] 
     }, {
       headers: {
         Authorization: `Basic ${authHeader}`,
@@ -19,7 +19,7 @@ const createJiraUser = async (email, displayName) => {
       },
     });
 
-    const accountId = userResponse.data.accountId;  // Store this in your database linked to the user
+    const accountId = userResponse.data.accountId;  
 
     // Add the user to the group 'jira-users-collectionest'
     await axios.post(`${jiraUrl}/rest/api/3/group/user?groupname=jira-users-collectionest`, {
@@ -46,7 +46,7 @@ const createJiraTicket = async (summary, priority, collectionName, pageLink, use
   const authHeader = Buffer.from(`${process.env.JIRA_EMAIL}:${apiToken}`).toString('base64');
 
   try {
-    // First, fetch the Jira accountId for the user based on their email
+    // fetch the Jira accountId for the user based on their email
     const userResponse = await axios.get(`${jiraUrl}/rest/api/3/user/search?query=${userEmail}`, {
       headers: {
         Authorization: `Basic ${authHeader}`,
@@ -54,13 +54,13 @@ const createJiraTicket = async (summary, priority, collectionName, pageLink, use
       },
     });
 
-    const userAccountId = userResponse.data[0]?.accountId;  // Assuming user exists and accountId is returned
+    const userAccountId = userResponse.data[0]?.accountId;  
     
     if (!userAccountId) {
       throw new Error('User not found in Jira');
     }
 
-    // Now create the Jira ticket with the assignee
+    // create the Jira ticket with the assignee
     const response = await axios.post(`${jiraUrl}/rest/api/3/issue`, {
       fields: {
         project: {
@@ -86,10 +86,10 @@ const createJiraTicket = async (summary, priority, collectionName, pageLink, use
           name: 'Support Ticket'
         },
         priority: {
-          name: priority // Ensure priority is properly formatted
+          name: priority 
         },
         assignee: {
-          accountId: userAccountId // Assign the issue to the user by their Jira accountId
+          accountId: userAccountId 
         }
       }
     }, {
@@ -116,7 +116,6 @@ const getUserTickets = async (req, res) => {
   const authHeader = Buffer.from(`${process.env.JIRA_EMAIL}:${apiToken}`).toString('base64');
 
   try {
-    // Properly wrap the userEmail in quotes
     const response = await axios.get(`${jiraUrl}/rest/api/3/search?jql=assignee='${userEmail}'`, {
       headers: {
         Authorization: `Basic ${authHeader}`,
