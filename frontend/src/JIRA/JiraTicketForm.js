@@ -1,5 +1,5 @@
 import React, {useContext } from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage} from 'formik';
 import { TextField, MenuItem, Button, CircularProgress, Box } from '@mui/material';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
@@ -39,7 +39,7 @@ const JiraTicketForm = ({ collectionName, pageLink }) => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, errors, touched }) => (
         <Form>
           <Box mb={2}>
             <Field
