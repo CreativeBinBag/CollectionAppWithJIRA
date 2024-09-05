@@ -40,16 +40,31 @@ const createJiraUser = async (email, displayName) => {
 
 //Jira Ticket generation
 
-const createJiraTicket = async (summary, priority, collectionName, pageLink) => {
+const createJiraTicket = async (summary, priority, collectionName, pageLink, userEmail) => {
   const jiraUrl = process.env.JIRA_BASE_URL;
   const apiToken = process.env.JIRA_API_TOKEN;
   const authHeader = Buffer.from(`${process.env.JIRA_EMAIL}:${apiToken}`).toString('base64');
 
   try {
+    // First, fetch the Jira accountId for the user based on their email
+    const userResponse = await axios.get(`${jiraUrl}/rest/api/3/user/search?query=${userEmail}`, {
+      headers: {
+        Authorization: `Basic ${authHeader}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const userAccountId = userResponse.data[0]?.accountId;  // Assuming user exists and accountId is returned
+    
+    if (!userAccountId) {
+      throw new Error('User not found in Jira');
+    }
+
+    // Now create the Jira ticket with the assignee
     const response = await axios.post(`${jiraUrl}/rest/api/3/issue`, {
       fields: {
         project: {
-          key: 'CMS001' 
+          key: 'CMS001'
         },
         summary: summary,
         description: {
@@ -68,12 +83,14 @@ const createJiraTicket = async (summary, priority, collectionName, pageLink) => 
           ]
         },
         issuetype: {
-          name: 'Support Ticket'  
+          name: 'Support Ticket'
         },
         priority: {
-          name: priority
+          name: priority // Ensure priority is properly formatted
         },
-        // Jira will manage the status field based on workflow transitions
+        assignee: {
+          accountId: userAccountId // Assign the issue to the user by their Jira accountId
+        }
       }
     }, {
       headers: {
@@ -88,6 +105,7 @@ const createJiraTicket = async (summary, priority, collectionName, pageLink) => 
     throw new Error('Failed to create Jira ticket');
   }
 };
+
 
 
 const getUserTickets = async (req, res) => {
