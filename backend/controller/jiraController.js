@@ -40,7 +40,6 @@ const createJiraUser = async (email, displayName) => {
 
 //Jira Ticket generation
 
-
 const createJiraTicket = async (summary, priority, collectionName, pageLink) => {
   const jiraUrl = process.env.JIRA_BASE_URL;
   const apiToken = process.env.JIRA_API_TOKEN;
@@ -53,14 +52,28 @@ const createJiraTicket = async (summary, priority, collectionName, pageLink) => 
           key: 'CMS001' 
         },
         summary: summary,
-        description: `Collection: ${collectionName}\nLink: ${pageLink}`,
+        description: {
+          "type": "doc",
+          "version": 1,
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "text": `Collection: ${collectionName}\nLink: ${pageLink}`,
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        },
         issuetype: {
           name: 'Support Ticket'  // Ensure this issue type exists
         },
         priority: {
           name: priority
         },
-        //jira will manage status field based on workflow transitions
+        // Jira will manage the status field based on workflow transitions
       }
     }, {
       headers: {
@@ -75,7 +88,6 @@ const createJiraTicket = async (summary, priority, collectionName, pageLink) => 
     throw new Error('Failed to create Jira ticket');
   }
 };
-
 
 
 const getUserTickets = async (req, res) => {
