@@ -92,6 +92,10 @@ const createJiraTicket = async (summary, priority, collectionName, pageLink) => 
 
 const getUserTickets = async (req, res) => {
   const userEmail = req.user.email; // Get current user email from authentication context
+  const jiraUrl = process.env.JIRA_BASE_URL;
+  const apiToken = process.env.JIRA_API_TOKEN;
+  const authHeader = Buffer.from(`${process.env.JIRA_EMAIL}:${apiToken}`).toString('base64');
+
 
   try {
     const response = await axios.get(`${jiraUrl}/rest/api/3/search?jql=reporter="${userEmail}"`, {
