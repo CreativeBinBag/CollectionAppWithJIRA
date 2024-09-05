@@ -16,7 +16,6 @@ import NewItemForm from './Admin/pages/CollectionManagement/NewItemForm';
 import HomePage from './Home/HomePage/HomePage';
 import Layout from './Layout';
 import HomeFeed from './Admin/pages/HomeFeed/HomeFeed';
-import JiraTicketForm from './JIRA/JiraTicketForm';
 import ViewTickets from './JIRA/ViewTickets';
 const App = () => {
   const [theme, colorMode] = useMode(); // Assuming useMode is a custom hook
@@ -66,7 +65,6 @@ const RoutesWrapper = () => {
        {/* Authenticated routes for Jira tickets */}
       <Route element={<PrivateRoute />}>
       <Route element={<Layout />}>
-        <Route path="/create-ticket" element={<JiraTicketForm />} />
         <Route path="/user-tickets" element={<ViewTickets />} />
       </Route>
       </Route> 

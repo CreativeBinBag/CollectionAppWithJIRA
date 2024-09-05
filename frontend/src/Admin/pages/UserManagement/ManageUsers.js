@@ -12,6 +12,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Header from '../../components/Header';
 import api from '../../api/axios';
 import ConfirmDeleteDialog from '../../components/ConfirmDeleteDialog';
+import CreateTicketButton from '../../../JIRA/createTicketButton';
+
 const ManageUsers = () => {
 
    
@@ -168,6 +170,9 @@ const ManageUsers = () => {
     }
   ];
 
+  const pageLink = window.location.href;
+  const collectionName = '';
+
   return (
     <Box m="8px" position="fixed" width="80%">
       <Header title= {t('userList')} subtitle={t('manageUsersofcollectionapp')} />
@@ -198,7 +203,9 @@ const ManageUsers = () => {
         <DataGrid rows={users} columns={columns} pageSize={10} rowsPerPageOptions={[10]} />
       </Box>
       <ConfirmDeleteDialog open={confirmDeleteOpen} onClose={handleDialogClose} onConfirm={handleConfirmDelete} />
-
+      <Box position="fixed" bottom="16px" right="16px"> {/* Fixed at bottom-right */}
+        <CreateTicketButton collectionName={collectionName} pageLink={pageLink} />
+      </Box>
     </Box>
   );
 };

@@ -126,13 +126,6 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
           
-            <Item
-              title={t('createJIRATicket')}
-              to="/create-ticket"
-              icon={<TextFieldsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
 
              <Item
               title={t('viewJIRATicket')}
