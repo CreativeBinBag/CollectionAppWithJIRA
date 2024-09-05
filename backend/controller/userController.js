@@ -5,7 +5,7 @@ const db = require("..");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const { Op } = require('sequelize');
-
+const { createJiraUser } = require('./jiraController');
 const {User} = db;
 
 // Registering a user
@@ -24,6 +24,12 @@ const register = async (req, res) => {
     });
 
     if (user) {
+
+      const jiraAccountId = await createJiraUser(email, userName);
+      
+      // Update the user with Jira accountId
+      await User.update({ jiraAccountId }, { where: { id: user.id } });
+      
       const token = jwt.sign({ id: user.id }, process.env.secretKey, { expiresIn: '15m' });
       const refreshToken = jwt.sign({ id: user.id }, process.env.refreshSecretKey, { expiresIn: '7d' });
 
@@ -34,6 +40,7 @@ const register = async (req, res) => {
     } else {
       return res.status(400).send("Username or Email is Taken");
     }
+    
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal server error");
