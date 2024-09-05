@@ -17,9 +17,7 @@ import HomePage from './Home/HomePage/HomePage';
 import Layout from './Layout';
 import HomeFeed from './Admin/pages/HomeFeed/HomeFeed';
 import JiraTicketForm from './JIRA/JiraTicketForm';
-import ViewTickets from './JIRA/viewTickets';
-
-
+import ViewTickets from './JIRA/ViewTickets';
 const App = () => {
   const [theme, colorMode] = useMode(); // Assuming useMode is a custom hook
 
