@@ -1,6 +1,6 @@
 import React, {useContext } from 'react';
 import { Formik, Form, Field, ErrorMessage} from 'formik';
-import { TextField, MenuItem, Button, CircularProgress, Box } from '@mui/material';
+import { Box, TextField, MenuItem, Button, CircularProgress, Box } from '@mui/material';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import api from '../Admin/api/axios';
@@ -18,10 +18,11 @@ const JiraTicketForm = ({ collectionName, pageLink }) => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const response = await api.post('/api/tickets', {
-        ...values,
+        summary: values.summary,
+        priority: values.priority,
         collectionName,
         pageLink,
-        userEmail: auth.email, 
+        userEmail: auth.email,
       });
       toast.success('Ticket created successfully!');
       console.log('Ticket link:', response.data.jiraUrl);
