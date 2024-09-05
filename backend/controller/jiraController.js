@@ -68,7 +68,7 @@ const createJiraTicket = async (summary, priority, collectionName, pageLink) => 
           ]
         },
         issuetype: {
-          name: 'Support Ticket'  // Ensure this issue type exists
+          name: 'Support Ticket'  
         },
         priority: {
           name: priority
