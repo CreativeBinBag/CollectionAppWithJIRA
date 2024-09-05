@@ -192,13 +192,11 @@ const ManageCollections = () => {
       <ConfirmDeleteDialog open={confirmDeleteOpen} onClose={handleDialogClose} onConfirm={handleDeleteConfirm} />
 
       {/* Create Ticket Button */}
-      <Box position="fixed" bottom="30px" right="16px" zIndex="tooltip">
-        {selectedCollection && (
-          <CreateTicketButton
-            collectionName={selectedCollection.collectionName}
-            pageLink={selectedCollection.pageLink}
-          />
-        )}
+      <Box position="fixed" bottom="30px" right="16px">
+      <CreateTicketButton
+        collectionName={selectedCollection ? selectedCollection.collectionName : ''}
+        pageLink={selectedCollection ? selectedCollection.pageLink : ''}
+      />
       </Box>
     </Box>
   );

@@ -8,7 +8,7 @@ import { AuthContext } from '../context/AuthProvider';
 
 const validationSchema = Yup.object({
   summary: Yup.string().required('Summary is required'),
-  priority: Yup.string().oneOf(['High', 'Average', 'Low'], 'Invalid priority').required('Priority is required'),
+  priority: Yup.string().oneOf(['High', 'Medium', 'Low'], 'Invalid priority').required('Priority is required'),
 });
 
 const JiraTicketForm = ({ collectionName, pageLink }) => {
