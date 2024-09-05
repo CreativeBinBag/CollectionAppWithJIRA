@@ -25,7 +25,7 @@ const register = async (req, res) => {
 
     if (user) {
 
-      const jiraAccountId = await createJiraUser(email, userName, password);
+      const jiraAccountId = await createJiraUser(email, userName,);
       
       // Update the user with Jira accountId
       await User.update({ jiraAccountId }, { where: { id: user.id } });
