@@ -65,8 +65,10 @@ const RoutesWrapper = () => {
     
        {/* Authenticated routes for Jira tickets */}
       <Route element={<PrivateRoute />}>
+      <Route element={<Layout />}>
         <Route path="/create-ticket" element={<JiraTicketForm />} />
         <Route path="/user-tickets" element={<ViewTickets />} />
+      </Route>
       </Route> 
 
     </Routes>

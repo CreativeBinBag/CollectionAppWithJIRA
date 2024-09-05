@@ -10,7 +10,7 @@ const ViewTickets = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const response = await api.get('/tickets/user'); 
+        const response = await api.get('/api/tickets/user'); 
         setTickets(response.data);
       } catch (err) {
         setError('Failed to fetch tickets');
