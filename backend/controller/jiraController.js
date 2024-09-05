@@ -115,9 +115,8 @@ const getUserTickets = async (req, res) => {
   const apiToken = process.env.JIRA_API_TOKEN;
   const authHeader = Buffer.from(`${process.env.JIRA_EMAIL}:${apiToken}`).toString('base64');
 
-
   try {
-    const response = await axios.get(`${jiraUrl}/rest/api/3/search?jql=reporter="${userEmail}"`, {
+    const response = await axios.get(`${jiraUrl}/rest/api/3/search?jql=reporter=${userEmail}`, {
       headers: {
         Authorization: `Basic ${authHeader}`,
         'Content-Type': 'application/json',
