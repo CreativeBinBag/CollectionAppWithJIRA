@@ -65,7 +65,7 @@ const JiraTicketForm = ({ collectionName, pageLink }) => {
               required
             >
               <MenuItem value="High">High</MenuItem>
-              <MenuItem value="Average">Average</MenuItem>
+              <MenuItem value="Medium">Average</MenuItem>
               <MenuItem value="Low">Low</MenuItem>
             </Field>
             <ErrorMessage name="priority" component="div" />
