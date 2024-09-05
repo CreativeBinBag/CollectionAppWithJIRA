@@ -117,7 +117,7 @@ const getUserTickets = async (req, res) => {
 
   try {
     // Properly wrap the userEmail in quotes
-    const response = await axios.get(`${jiraUrl}/rest/api/3/search?jql=reporter="${userEmail}"`, {
+    const response = await axios.get(`${jiraUrl}/rest/api/3/search?jql=reporter='${userEmail}'`, {
       headers: {
         Authorization: `Basic ${authHeader}`,
         'Content-Type': 'application/json',
