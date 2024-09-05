@@ -37,6 +37,8 @@ i18n.use(LanguageDetector).use(initReactI18next).init({
         "manageUsers": "Manage Users",
         "manageCollections": "Manage Collections",
         "createNewCollections": "Create New Collections",
+        "createJIRATicket": "JIRA Ticket Form",
+        "viewJIRATicket": "JIRA Ticket List",
         "logout": "Logout",
 
         //users
@@ -142,6 +144,8 @@ i18n.use(LanguageDetector).use(initReactI18next).init({
          "manageUsers": "ব্যবহারকারী ব্যবস্থাপনা",
          "manageCollections": "সংগ্রহের ব্যবস্থাপনা",
          "createNewCollections": "নতুন সংগ্রহ যোগ করুন ",
+         "createJIRATicket": "জিরা টিকিট ফর্ম",
+         "viewJIRATicket": "জিরা টিকিট তালিকা",
          "logout": "লগ আউট",
 
         //users

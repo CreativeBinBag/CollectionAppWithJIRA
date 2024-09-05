@@ -9,10 +9,10 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import CollectionsBookmarkOutlinedIcon from "@mui/icons-material/CollectionsBookmarkOutlined";
 import CreateNewFolderOutlinedIcon from "@mui/icons-material/CreateNewFolderOutlined";
-import PostAddOutlinedIcon from "@mui/icons-material/PostAddOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import TextFieldsOutlinedIcon from '@mui/icons-material/TextFieldsOutlined';
+import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -126,6 +126,21 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
           
+            <Item
+              title={t('createJIRATicket')}
+              to="/create-ticket"
+              icon={<TextFieldsOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+             <Item
+              title={t('viewJIRATicket')}
+              to="/user-tickets"
+              icon={<ListAltOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
 
             <Item
               title={t('logout')}

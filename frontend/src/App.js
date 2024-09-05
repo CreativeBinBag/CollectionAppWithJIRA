@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ColorModeContext, useMode } from './theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import Topbar from './Admin/components/Topbar';
 import Register from './credentials/Register';
 import Login from './credentials/Login';
 import ForgotPass from './credentials/ForgotPass';
 import ResetPass from './credentials/ResetPass'; 
 import PrivateRoute from './PrivateRoute';
-import { AuthProvider } from './context/AuthProvider'; // Import AuthProvider
 import './index.css';
 import ManageUsers from './Admin/pages/UserManagement/ManageUsers';
 import ManageCollections from './Admin/pages/CollectionManagement/ManageCollections';
@@ -16,10 +14,10 @@ import ViewCollection from './Admin/pages/CollectionManagement/ViewCollection';
 import NewCollectionForm from './Admin/pages/CollectionManagement/NewCollectionForm';
 import NewItemForm from './Admin/pages/CollectionManagement/NewItemForm';
 import HomePage from './Home/HomePage/HomePage';
-import Appbar from './Home/components/Appbar';
 import Layout from './Layout';
 import HomeFeed from './Admin/pages/HomeFeed/HomeFeed';
-
+import JiraTicketForm from './JIRA/JiraTicketForm';
+import ViewTickets from './JIRA/viewTickets';
 
 
 const App = () => {
@@ -66,6 +64,13 @@ const RoutesWrapper = () => {
           <Route path="/api/items/:id/create" element={<NewItemForm />} />
         </Route>
       </Route>
+    
+       {/* Authenticated routes for Jira tickets */}
+      <Route element={<PrivateRoute />}>
+        <Route path="/create-ticket" element={<JiraTicketForm />} />
+        <Route path="/user-tickets" element={<ViewTickets />} />
+      </Route> 
+
     </Routes>
   );
 };
