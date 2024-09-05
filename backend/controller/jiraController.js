@@ -41,7 +41,7 @@ const createJiraUser = async (email, displayName) => {
 //Jira Ticket generation
 
 
-const createJiraTicket = async (summary, priority, collectionName, pageLink, reporterEmail) => {
+const createJiraTicket = async (summary, priority, collectionName, pageLink) => {
   const jiraUrl = process.env.JIRA_BASE_URL;
   const apiToken = process.env.JIRA_API_TOKEN;
   const authHeader = Buffer.from(`${process.env.JIRA_EMAIL}:${apiToken}`).toString('base64');
@@ -50,18 +50,17 @@ const createJiraTicket = async (summary, priority, collectionName, pageLink, rep
     const response = await axios.post(`${jiraUrl}/rest/api/3/issue`, {
       fields: {
         project: {
-          key: 'CMS001'  
+          key: 'CMS001' 
         },
         summary: summary,
-        description: `Link: ${pageLink} \n Collection: ${collectionName}`,
+        description: `Collection: ${collectionName}\nLink: ${pageLink}`,
         issuetype: {
           name: 'Support Ticket'  // Ensure this issue type exists
         },
         priority: {
           name: priority
         },
-       
-        customfield_10048: 'Opened' 
+        //jira will manage status field based on workflow transitions
       }
     }, {
       headers: {
@@ -76,6 +75,7 @@ const createJiraTicket = async (summary, priority, collectionName, pageLink, rep
     throw new Error('Failed to create Jira ticket');
   }
 };
+
 
 
 const getUserTickets = async (req, res) => {
