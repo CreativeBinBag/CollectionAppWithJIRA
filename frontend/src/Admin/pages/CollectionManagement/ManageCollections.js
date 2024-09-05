@@ -67,11 +67,14 @@ const ManageCollections = () => {
   const handleRowSelection = (params) => {
     const selectedRow = collections.find((collection) => collection.id === params.id);
     if (selectedRow) {
-      setSelectedCollection({
+      const collectionData = {
         collectionName: selectedRow.name,
-        pageLink: `/collections/${selectedRow.id}/view`
-      });
+        pageLink: `/api/collections/${selectedRow.id}/view`
+      };
+      setSelectedCollection(collectionData);
+      console.log('Selected Collection Data:', collectionData);
     }
+    
   };
 
   const handleDeleteConfirm = async () => {
