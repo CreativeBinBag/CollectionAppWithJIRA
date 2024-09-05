@@ -171,7 +171,7 @@ const ManageCollections = () => {
           backgroundColor: colors.blueAccent[700]
         },
       }}>
-        <DataGrid rows={collections} columns={columns} pageSize={10} rowsPerPageOptions={[10]} onRowClick={handleRowSelection} checkboxSelection />
+        <DataGrid rows={collections} columns={columns} pageSize={10} rowsPerPageOptions={[10]} onRowClick={handleRowSelection} checkboxSelection disableRowSelectionOnClick />
       </Box>
 
       <Dialog open={dialogOpen} onClose={handleDialogClose} maxWidth="md" fullWidth>
