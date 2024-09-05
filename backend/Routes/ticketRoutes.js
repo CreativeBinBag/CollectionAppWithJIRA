@@ -5,6 +5,6 @@ const { authenticateUser } = require('../Middleware/privileges');
 const router = express.Router();
 
 router.post('/tickets', generateTicket);
-router.get('/tickets/user', getUserTickets)
+router.get('/tickets/user', authenticateUser, getUserTickets)
 
 module.exports = router;
