@@ -14,7 +14,7 @@ const likeRoutes = require('./Routes/likeRoutes');
 const commentRoutes = require('./Routes/commentRoutes');
 const tagRoutes = require('./Routes/tagRoutes');
 const itemTagsRoutes = require('./Routes/itemTagsRoutes');
-
+const ticketRoutes = require('./Routes/ticketRoutes');
 
 
 //setting up port
@@ -44,6 +44,7 @@ app.use('/api/likes', likeRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/tags', tagRoutes);
 app.use('/api/item-tags', itemTagsRoutes); 
+app.use('/api', ticketRoutes);
 
 
 
