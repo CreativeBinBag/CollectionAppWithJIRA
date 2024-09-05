@@ -122,9 +122,15 @@ const getUserTickets = async (req, res) => {
         'Content-Type': 'application/json',
       },
     });
-    return res.json(response.data.issues);  // Return array of tickets
+
+    // Check if issues exist
+    if (response.data.issues && response.data.issues.length > 0) {
+      return res.json(response.data.issues);  // Return array of tickets
+    } else {
+      return res.json([]);  // Return an empty array if no tickets were found
+    }
   } catch (error) {
-    console.error('Error fetching Jira tickets:', error);
+    console.error('Error fetching Jira tickets:', error.response ? error.response.data : error.message);
     return res.status(500).json({ error: 'Failed to fetch Jira tickets' });
   }
 };
