@@ -10,7 +10,6 @@ const PrivateRoute = ({ adminOnly = false }) => {
     return null; 
   }
 
-  console.log('Auth:', auth);
   console.log('Admin check:', checkAdmin());
   
   if (!auth) {

@@ -74,11 +74,3 @@ const RoutesWrapper = () => {
 };
 
 export default App;
-/*<Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPass />} />
-          <Route path="/reset-password/:token" element={<ResetPass />} />
-          
-          <Route path="/" element={<Home />} /> */
-
-/* */
