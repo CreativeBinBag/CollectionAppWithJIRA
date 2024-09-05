@@ -55,14 +55,13 @@ const createJiraTicket = async (summary, priority, collectionName, pageLink, rep
         summary: summary,
         description: `Link: ${pageLink} \n Collection: ${collectionName}`,
         issuetype: {
-          name: 'Support Ticket'  
+          name: 'Support Ticket'  // Ensure this issue type exists
         },
         priority: {
           name: priority
         },
-        reporter: {
-          emailAddress: reporterEmail 
-        }
+       
+        customfield_10048: 'Opened' 
       }
     }, {
       headers: {
@@ -79,24 +78,23 @@ const createJiraTicket = async (summary, priority, collectionName, pageLink, rep
 };
 
 
-const getUserTickets = async (email) => {
-  const jiraUrl = process.env.JIRA_BASE_URL;
-  const apiToken = process.env.JIRA_API_TOKEN;
-  const authHeader = Buffer.from(`${process.env.JIRA_EMAIL}:${apiToken}`).toString('base64');
+const getUserTickets = async (req, res) => {
+  const userEmail = req.user.email; // Get current user email from authentication context
 
   try {
-    const response = await axios.get(`${jiraUrl}/rest/api/3/search?jql=reporter="${email}"`, {
+    const response = await axios.get(`${jiraUrl}/rest/api/3/search?jql=reporter="${userEmail}"`, {
       headers: {
         Authorization: `Basic ${authHeader}`,
         'Content-Type': 'application/json',
       },
     });
-    return response.data.issues;  // Array of tickets
+    return res.json(response.data.issues);  // Return array of tickets
   } catch (error) {
     console.error('Error fetching Jira tickets:', error);
-    throw new Error('Failed to fetch Jira tickets');
+    return res.status(500).json({ error: 'Failed to fetch Jira tickets' });
   }
 };
+
 
 
 
