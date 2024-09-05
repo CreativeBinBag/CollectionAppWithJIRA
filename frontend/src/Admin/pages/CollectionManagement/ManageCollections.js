@@ -147,7 +147,7 @@ const ManageCollections = () => {
   ];
 
   return (
-    <Box m="8px" position="fixed" width= "80%">
+    <Box m="8px" position="relative" width="80%" height="100vh">
       <Header title= {t('collectionsList')}subtitle={t('manageCollectionsofallUsers')} />
       <Box m="40px 0 0 0" height="70vh" sx={{
         "& .MuiDataGrid-root": {

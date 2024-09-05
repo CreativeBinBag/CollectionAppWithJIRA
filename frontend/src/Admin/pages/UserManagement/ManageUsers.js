@@ -174,7 +174,7 @@ const ManageUsers = () => {
   const collectionName = '';
 
   return (
-    <Box m="8px" position="fixed" width="80%">
+    <Box m="8px" position="relative" width="80%" height="100vh">
       <Header title= {t('userList')} subtitle={t('manageUsersofcollectionapp')} />
       <Box m="40px 0 0 0" height="70vh" sx={{
         "& .MuiDataGrid-root": {
@@ -203,7 +203,7 @@ const ManageUsers = () => {
         <DataGrid rows={users} columns={columns} pageSize={10} rowsPerPageOptions={[10]} />
       </Box>
       <ConfirmDeleteDialog open={confirmDeleteOpen} onClose={handleDialogClose} onConfirm={handleConfirmDelete} />
-      <Box position="fixed" bottom="30px" right="16px"> {/* Fixed at bottom-right */}
+      <Box position="fixed" bottom="30px" right="16px">
         <CreateTicketButton collectionName={collectionName} pageLink={pageLink} />
       </Box>
     </Box>

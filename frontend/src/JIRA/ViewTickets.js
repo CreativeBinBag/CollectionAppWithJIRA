@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CircularProgress, Typography, List, ListItem, ListItemText, Box, Link } from '@mui/material';
+import { CircularProgress, Typography, List, ListItem, ListItemText, Box, Link, Card, CardContent } from '@mui/material';
 import api from '../Admin/api/axios';
 
 const ViewTickets = () => {
@@ -27,40 +27,52 @@ const ViewTickets = () => {
   if (error) return <Typography color="error">{error}</Typography>;
 
   return (
-    <Box sx={{ padding: 3 }}>
-      <Typography variant="h6" gutterBottom>
-        Your Jira Tickets
-      </Typography>
-      <List>
-        {tickets.map(ticket => (
-          <ListItem key={ticket.id}>
-            <ListItemText
-              primary={
-                <Link 
-                  href={`https://collectionest.atlassian.net/browse/${ticket.key}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  sx={{
-                    color: 'lightblue', // More visible in dark mode
-                    fontWeight: 'bold',
-                    textDecoration: 'none',
-                    '&:hover': {
-                      textDecoration: 'underline',
-                      color: 'white', // Change on hover for better contrast
-                    },
-                    '&:focus': {
-                      outline: '2px solid white', // Focus effect
-                    },
-                  }}
-                >
-                  {ticket.fields.summary}
-                </Link>
-              }
-              secondary={ticket.fields.status.name}
-            />
-          </ListItem>
-        ))}
-      </List>
+    <Box 
+      sx={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh', 
+        padding: 3 
+      }}
+    >
+      <Card sx={{ width: '100%', maxWidth: 800, boxShadow: 3 }}>
+        <CardContent>
+          <Typography variant="h5" gutterBottom>
+            Your Jira Tickets
+          </Typography>
+          <List>
+            {tickets.map(ticket => (
+              <ListItem key={ticket.id}>
+                <ListItemText
+                  primary={
+                    <Link 
+                      href={`https://collectionest.atlassian.net/browse/${ticket.key}`} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      sx={{
+                        color: '#1976d2', // Blue color for links
+                        fontWeight: 'bold',
+                        textDecoration: 'none',
+                        '&:hover': {
+                          textDecoration: 'underline',
+                          color: '#115293', // Darker blue on hover
+                        },
+                        '&:focus': {
+                          outline: '2px solid #115293', // Focus effect with darker blue
+                        },
+                      }}
+                    >
+                      {ticket.fields.summary}
+                    </Link>
+                  }
+                  secondary={ticket.fields.status.name}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </CardContent>
+      </Card>
     </Box>
   );
 };
