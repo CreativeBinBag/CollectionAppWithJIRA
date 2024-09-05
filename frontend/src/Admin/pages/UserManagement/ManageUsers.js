@@ -203,7 +203,7 @@ const ManageUsers = () => {
         <DataGrid rows={users} columns={columns} pageSize={10} rowsPerPageOptions={[10]} />
       </Box>
       <ConfirmDeleteDialog open={confirmDeleteOpen} onClose={handleDialogClose} onConfirm={handleConfirmDelete} />
-      <Box position="fixed" bottom="16px" right="16px"> {/* Fixed at bottom-right */}
+      <Box position="fixed" bottom="30px" right="16px"> {/* Fixed at bottom-right */}
         <CreateTicketButton collectionName={collectionName} pageLink={pageLink} />
       </Box>
     </Box>

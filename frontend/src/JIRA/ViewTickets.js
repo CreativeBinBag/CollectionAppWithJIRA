@@ -27,7 +27,7 @@ const ViewTickets = () => {
   if (error) return <Typography color="error">{error}</Typography>;
 
   return (
-    <Box>
+    <Box sx={{ padding: 3 }}>
       <Typography variant="h6" gutterBottom>
         Your Jira Tickets
       </Typography>

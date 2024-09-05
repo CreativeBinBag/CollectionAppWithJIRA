@@ -11,9 +11,9 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import PostAddOutlinedIcon from "@mui/icons-material/PostAddOutlined";
 import Header from '../../components/Header';
 import api from '../../api/axios';
-import EditCollectionForm from './EditCollectionForm'; // Import your new form component
+import EditCollectionForm from './EditCollectionForm'; 
 import ConfirmDeleteDialog from '../../components/ConfirmDeleteDialog';
-
+import CreateTicketButton from '../../../JIRA/CreateTicketButton';
 
 const ManageCollections = () => {
   const theme = useTheme();
@@ -25,6 +25,8 @@ const ManageCollections = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const [collectionToDelete, setCollectionToDelete] = useState(null);
+
+  const [selectedCollection, setSelectedCollection] = useState(null); 
  
 
   const navigate = useNavigate();
@@ -59,6 +61,16 @@ const ManageCollections = () => {
       }
     } catch (error) {
       console.error(`Error performing ${action}:`, error);
+    }
+  };
+
+  const handleRowSelection = (params) => {
+    const selectedRow = collections.find((collection) => collection.id === params.id);
+    if (selectedRow) {
+      setSelectedCollection({
+        collectionName: selectedRow.name,
+        pageLink: `/collections/${selectedRow.id}/view`
+      });
     }
   };
 
@@ -156,7 +168,7 @@ const ManageCollections = () => {
           backgroundColor: colors.blueAccent[700]
         },
       }}>
-        <DataGrid rows={collections} columns={columns} pageSize={10} rowsPerPageOptions={[10]} />
+        <DataGrid rows={collections} columns={columns} pageSize={10} rowsPerPageOptions={[10]} onRowClick={handleRowSelection} checkboxSelection />
       </Box>
 
       <Dialog open={dialogOpen} onClose={handleDialogClose} maxWidth="md" fullWidth>
@@ -178,6 +190,14 @@ const ManageCollections = () => {
       
       </Dialog>
       <ConfirmDeleteDialog open={confirmDeleteOpen} onClose={handleDialogClose} onConfirm={handleDeleteConfirm} />
+
+      {/* Create Ticket Button */}
+      {selectedCollection && (
+        <CreateTicketButton
+          collectionName={selectedCollection.collectionName}
+          pageLink={selectedCollection.pageLink}
+        />
+      )}
 
     </Box>
   );
