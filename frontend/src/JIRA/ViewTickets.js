@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { CircularProgress, Typography, List, ListItem, ListItemText, Box, Link, Card, CardContent } from '@mui/material';
+import { CircularProgress, Typography, List, ListItem, ListItemText, Box, Link, Card, CardContent, useTheme } from '@mui/material';
+import { tokens } from '../theme';
 import api from '../Admin/api/axios';
 
 const ViewTickets = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -36,7 +39,7 @@ const ViewTickets = () => {
         padding: 3 
       }}
     >
-      <Card sx={{ width: '100%', maxWidth: 800, boxShadow: 3 }}>
+      <Card sx={{ width: '100%', maxWidth: 800, boxShadow: 3, backgroundColor: colors.primary[400] }}>
         <CardContent>
           <Typography variant="h5" gutterBottom>
             Your Jira Tickets
@@ -51,15 +54,15 @@ const ViewTickets = () => {
                       target="_blank" 
                       rel="noopener noreferrer"
                       sx={{
-                        color: '#1976d2', // Blue color for links
+                        color: '#1976d2', 
                         fontWeight: 'bold',
                         textDecoration: 'none',
                         '&:hover': {
                           textDecoration: 'underline',
-                          color: '#115293', // Darker blue on hover
+                          color: '#115293', 
                         },
                         '&:focus': {
-                          outline: '2px solid #115293', // Focus effect with darker blue
+                          outline: '2px solid #115293', 
                         },
                       }}
                     >
