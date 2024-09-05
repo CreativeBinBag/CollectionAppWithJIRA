@@ -10,7 +10,7 @@ const ViewTickets = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const response = await api.get('/api/tickets/user'); 
+        const response = await api.get('/api/tickets/user');
         setTickets(response.data);
       } catch (err) {
         setError('Failed to fetch tickets');
@@ -28,24 +28,40 @@ const ViewTickets = () => {
 
   return (
     <Box>
-    <Typography variant="h6">Your Jira Tickets</Typography>
-    <List>
-      {tickets.map(ticket => (
-        <ListItem key={ticket.id}>
-          <ListItemText
-            primary={
-
-            <Link href={`https://collectionest.atlassian.net/browse/${ticket.key}`} target="_blank" rel="noopener noreferrer">
-              {ticket.fields.summary}
-            </Link>
-
-            }
-            secondary={ticket.fields.status.name}
-          />
-        </ListItem>
-      ))}
-    </List>
-  </Box>
+      <Typography variant="h6" gutterBottom>
+        Your Jira Tickets
+      </Typography>
+      <List>
+        {tickets.map(ticket => (
+          <ListItem key={ticket.id}>
+            <ListItemText
+              primary={
+                <Link 
+                  href={`https://collectionest.atlassian.net/browse/${ticket.key}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  sx={{
+                    color: 'lightblue', // More visible in dark mode
+                    fontWeight: 'bold',
+                    textDecoration: 'none',
+                    '&:hover': {
+                      textDecoration: 'underline',
+                      color: 'white', // Change on hover for better contrast
+                    },
+                    '&:focus': {
+                      outline: '2px solid white', // Focus effect
+                    },
+                  }}
+                >
+                  {ticket.fields.summary}
+                </Link>
+              }
+              secondary={ticket.fields.status.name}
+            />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
   );
 };
 
