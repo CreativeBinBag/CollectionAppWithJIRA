@@ -25,7 +25,7 @@ const app = express()
 
 //middleware
 app.use(cors({
-  origin: 'https://collection-app-chi.vercel.app', // Use environment variable for client URL
+  origin: 'https://collection-app-with-jira.vercel.app', // Use environment variable for client URL
   credentials: true
 }));
 app.use(cookieParser())
