@@ -34,9 +34,11 @@ const ViewTickets = () => {
         <ListItem key={ticket.id}>
           <ListItemText
             primary={
-              <Link href={`${process.env.REACT_APP_JIRA_BASE_URL}/browse/${ticket.key}`} target="_blank" rel="noopener noreferrer">
-                {ticket.fields.summary}
-              </Link>
+
+            <Link href={`https://collectionest.atlassian.net/browse/${ticket.key}`} target="_blank" rel="noopener noreferrer">
+              {ticket.fields.summary}
+            </Link>
+
             }
             secondary={ticket.fields.status.name}
           />
